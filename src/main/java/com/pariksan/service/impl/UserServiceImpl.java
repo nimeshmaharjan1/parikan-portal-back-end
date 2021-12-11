@@ -6,9 +6,11 @@ import com.pariksan.repo.RoleRepository;
 import com.pariksan.repo.UserRepository;
 import com.pariksan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
