@@ -11,8 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/user")
-@CrossOrigin("*")
+@RequestMapping("/user/")
 public class UserController {
 
     @Autowired
@@ -46,4 +45,5 @@ public class UserController {
     public void deleteUser(@PathVariable("userId") Long userId){
         this.userService.deleteUser(userId);
     }
+
 }
