@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
             }
             user.getUserRoles().addAll(userRoles);
             local = this.userRepository.save(user);
-            return local;
         }
+        return local;
     }
 
     //getting user by username

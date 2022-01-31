@@ -81,7 +81,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return userEnabled;
     }
 
 
@@ -94,7 +94,8 @@ public class User implements UserDetails {
 
         Set<Authority> set = new HashSet<>();
 
-        this.userRoles.forEach(userRole -> set.add(new Authority(userRole.getRole().getRoleName())));
+        this.userRoles.forEach(userRole -> { set.add(new Authority(userRole.getRole().getRoleName()));
+        });
 
         return set;
     }
