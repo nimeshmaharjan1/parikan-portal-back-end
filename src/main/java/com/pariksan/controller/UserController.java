@@ -1,10 +1,12 @@
 package com.pariksan.controller;
 
+import com.pariksan.helper.UserFoundException;
 import com.pariksan.model.Role;
 import com.pariksan.model.User;
 import com.pariksan.model.UserRole;
 import com.pariksan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -53,6 +56,10 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable("userId") Long userId){
         this.userService.deleteUser(userId);
+    }
+    @ExceptionHandler(UserFoundException.class)
+    public ResponseEntity<?> exceptionHandler(UserFoundException ex) {
+        return ResponseEntity.ok(ex.getMessage());
     }
 
 }

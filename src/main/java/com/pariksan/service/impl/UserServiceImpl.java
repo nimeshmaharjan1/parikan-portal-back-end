@@ -1,5 +1,6 @@
 package com.pariksan.service.impl;
 
+import com.pariksan.helper.UserFoundException;
 import com.pariksan.model.User;
 import com.pariksan.model.UserRole;
 import com.pariksan.repo.RoleRepository;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
         User local = this.userRepository.findByUsername(user.getUsername());
         if (local != null) {
             System.out.println("User is already there");
-            throw new Exception("User is already present");
+            throw new UserFoundException("Username already exists in the database.");
         } else {
             for (UserRole ur : userRoles) {
                 roleRepository.save(ur.getRole());

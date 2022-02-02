@@ -1,5 +1,6 @@
 package com.pariksan;
 
+import com.pariksan.helper.UserFoundException;
 import com.pariksan.model.Role;
 import com.pariksan.model.User;
 import com.pariksan.model.UserRole;
@@ -30,27 +31,30 @@ public class PariksanportalApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("The application is running...");
-		// User user = new User();
-		// user.setFirstName("Nimesh");
-		// user.setLastName("Maharjan");
-		// user.setUsername("nimeshmaharjan1");
-		// user.setPassword(this.bCryptPasswordEncoder.encode("123456"));
-		// user.setEmail("nimesh@gmail.com");
-		// user.setProfile("default.png");
+		try{
+		User user = new User();
+		user.setFirstName("Nimesh");
+		user.setLastName("Maharjan");
+		user.setUsername("nimeshmaharjan1");
+		user.setPassword(this.bCryptPasswordEncoder.encode("123456"));
+		user.setEmail("nimesh@gmail.com");
+		user.setProfile("default.png");
 
-		// Role role1 = new Role();
-		// role1.setRoleId(44L);
-		// role1.setRoleName("ADMIN");
+		Role role1 = new Role();
+		role1.setRoleId(44L);
+		role1.setRoleName("ADMIN");
 		
-		// Set<UserRole> userRoleSet = new HashSet<>();
-		// UserRole userRole = new UserRole();
+		Set<UserRole> userRoleSet = new HashSet<>();
+		UserRole userRole = new UserRole();
 
-		// userRole.setRole(role1);
-		// userRole.setUser(user);
-		// userRoleSet.add(userRole);
+		userRole.setRole(role1);
+		userRole.setUser(user);
+		userRoleSet.add(userRole);
 
-		// User user1 = this.userService.createUser(user, userRoleSet);
-		// System.out.println(user1.getUsername());
-
+		User user1 = this.userService.createUser(user, userRoleSet);
+		System.out.println(user1.getUsername());
+	} catch(UserFoundException e) {
+		e.printStackTrace();
+	}
 	}
 }
