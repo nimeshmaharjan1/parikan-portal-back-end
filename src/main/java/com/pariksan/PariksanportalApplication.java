@@ -39,6 +39,8 @@ public class PariksanportalApplication implements CommandLineRunner {
 		user.setPassword(this.bCryptPasswordEncoder.encode("123456"));
 		user.setEmail("nimesh@gmail.com");
 		user.setProfile("default.png");
+		user.setPhone("9843323200");
+		user.setOccupation("Junior Developer");
 
 		Role role1 = new Role();
 		role1.setRoleId(44L);

@@ -23,6 +23,7 @@ public class User implements UserDetails {
     private String phone;
     private boolean userEnabled = true;
     private String profile;
+    private String occupation;
 
     //user many roles
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
@@ -114,6 +115,14 @@ public class User implements UserDetails {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
     public String getLastName() {
