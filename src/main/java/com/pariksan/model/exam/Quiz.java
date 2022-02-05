@@ -1,4 +1,4 @@
-package com.pariksan.model.exams;
+package com.pariksan.model.exam;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +14,7 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long quizId;
     private String title;
+    @Column(length = 5000)
     private String description;
     private String maxMarks;
     private String numberOfQuestions;

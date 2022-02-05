@@ -1,13 +1,15 @@
-package com.pariksan.model.exams;
+package com.pariksan.model.exam;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Question {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long questionId;
+
+    @Column(length = 5000)
     private String content;
     private String image;
     private String option1;
@@ -86,11 +88,11 @@ public class Question {
         this.answer = answer;
     }
 
-    public com.pariksan.model.exams.Quiz getQuiz() {
+    public Quiz getQuiz() {
         return quiz;
     }
 
-    public void setQuiz(com.pariksan.model.exams.Quiz quiz) {
+    public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
     }
 }

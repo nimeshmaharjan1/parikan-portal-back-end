@@ -1,4 +1,4 @@
-package com.pariksan.model.exams;
+package com.pariksan.model.exam;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,6 +13,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long categoryId;
     private String title;
+    @Column(length = 5000)
     private String description;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
