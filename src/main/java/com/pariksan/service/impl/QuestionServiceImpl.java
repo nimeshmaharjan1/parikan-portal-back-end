@@ -5,10 +5,12 @@ import com.pariksan.model.exam.Quiz;
 import com.pariksan.repo.QuestionRepository;
 import com.pariksan.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class QuestionServiceImpl implements QuestionService {
 
     @Autowired

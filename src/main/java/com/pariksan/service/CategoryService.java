@@ -1,6 +1,7 @@
 package com.pariksan.service;
 
 import com.pariksan.model.exam.Category;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Set;
 
