@@ -20,9 +20,17 @@ public class Quiz {
     private String numberOfQuestions;
     private boolean active = false;
 
-    @OneToMany
+    @OneToMany(mappedBy = "quiz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Question> questions = new HashSet<>();
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
