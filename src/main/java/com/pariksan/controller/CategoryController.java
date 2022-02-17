@@ -33,6 +33,7 @@ public class CategoryController {
         return ResponseEntity.ok(this.categoryService.getCategories());
     }
 
+    //UPDATE CATEGORY
     @PutMapping("/")
     public Category updateCategory(@RequestBody Category category) {
         return this.categoryService.updateCategory(category);
