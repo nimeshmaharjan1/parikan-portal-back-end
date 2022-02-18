@@ -24,6 +24,7 @@ public class User implements UserDetails {
     private boolean userEnabled = true;
     private String profile;
     private String occupation;
+    private boolean isStudent = false;
 
     //user many roles
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
@@ -123,6 +124,14 @@ public class User implements UserDetails {
 
     public void setOccupation(String occupation) {
         this.occupation = occupation;
+    }
+
+    public boolean getIsStudent() {
+        return isStudent;
+    }
+
+    public void setIsStudent(boolean isStudent) {
+        this.isStudent = isStudent;
     }
 
     public String getLastName() {

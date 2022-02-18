@@ -40,6 +40,7 @@ public class PariksanportalApplication implements CommandLineRunner {
 		user.setEmail("nimesh@gmail.com");
 		user.setProfile("default.png");
 		user.setPhone("9843323200");
+		user.setIsStudent(true);
 		user.setOccupation("Junior Developer");
 
 		Role role1 = new Role();
