@@ -1,7 +1,9 @@
 package com.pariksan.service;
 
+import com.pariksan.model.exam.Category;
 import com.pariksan.model.exam.Quiz;
 
+import java.util.List;
 import java.util.Set;
 
 public interface QuizService {
@@ -10,4 +12,7 @@ public interface QuizService {
     public Set<Quiz> getQuizzes();
     public Quiz getQuiz(Long quizId);
     public void deleteQuiz(Long quizId);
+    public List<Quiz> getQuizzesofCategory(Category category);
+    public List<Quiz> getActiveQuizess();
+    public List<Quiz> getActiveQuizessOfCategory(Category category);
 }

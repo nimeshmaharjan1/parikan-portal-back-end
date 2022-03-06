@@ -12,10 +12,15 @@ public class Question {
     @Column(length = 5000)
     private String content;
     private String image;
+    @Column(length = 5000)
     private String option1;
+    @Column(length = 5000)
     private String option2;
+    @Column(length = 5000)
     private String option3;
+    @Column(length = 5000)
     private String option4;
+    @Column(length = 5000)
     private String answer;
 
     public Question() {
