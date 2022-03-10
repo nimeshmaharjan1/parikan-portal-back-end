@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -89,5 +90,25 @@ public class QuestionController {
     @DeleteMapping("/{questionId}")
         public void deleteQuestion(@PathVariable("questionId") Long questionId) {
             this.questionService.deleteQuestion(questionId);
+    }
+    //EVALUATE QUIZ
+    @PostMapping("evaluate-quiz")
+    public ResponseEntity<?> evaluateQuiz(@RequestBody List<Question> questions ) {
+        double marksGot = 0;
+        int correctAnswers = 0;
+        int attempted = 0;
+
+        for (Question q : questions) {
+                Question question = this.questionService.getQuestionAnswer(q.getQuestionId());
+                if (question.getAnswer().equals(q.getGivenAnswer())) {
+                    correctAnswers++;
+                    double marksSingle = Double.parseDouble(questions.get(0).getQuiz().getMaxMarks())/questions.size();
+                    marksGot += marksSingle;
+                } if (q.getGivenAnswer() != null) {
+                    attempted++;
+                }
+            }
+            Map<Object, Object> map = Map.of("marksGot", marksGot, "correctAnswers", correctAnswers, "attempted", attempted);
+        return ResponseEntity.ok(map);
     }
 }
