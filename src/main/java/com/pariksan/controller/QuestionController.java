@@ -37,40 +37,23 @@ public class QuestionController {
     public ResponseEntity<Question> updateQuestion(@RequestBody Question question) {
         return ResponseEntity.ok(this.questionService.updateQuestion(question));
     }
-
-    //GET Questions
-//    @GetMapping("/quiz/{quizId}")
-//    public ResponseEntity<?> getQuestionsOfQuiz(@PathVariable("quizId") Long quizId) {
-//
-////        Quiz quiz = new Quiz();
-////        quiz.setQuizId(quizId);
-////        Set<Question> questionsOfQuiz = this.questionService.getQuestionsOfQuiz(quiz);
-////        return ResponseEntity.ok(questionsOfQuiz);
-//
-//        Quiz quiz = this.quizService.getQuiz(quizId);
-//        Set<Question> questions = quiz.getQuestions();
-//        List list = new ArrayList(questions);
-//        if ( list.size() > Integer.parseInt(quiz.getNumberOfQuestions())) {
-//            list= list.subList(0, Integer.parseInt(quiz.getNumberOfQuestions() + 1));
-//        }
-//        Collections.shuffle(list);
-//        return ResponseEntity.ok(list);
-//    }
-
+    
     @GetMapping("/quiz/{quizId}")
     public ResponseEntity<?> getQuestionsOfQuiz(@PathVariable("quizId") Long quizId) {
 
         Quiz quiz = this.quizService.getQuiz(quizId);
         Set<Question> questions = quiz.getQuestions();
-        List list = new ArrayList(questions);
+        List<Question> list = new ArrayList(questions);
         if (list.size() > Integer.parseInt(quiz.getNumberOfQuestions())) {
             list = list.subList(0, Integer.parseInt(quiz.getNumberOfQuestions() + 1));
         }
+        list.forEach((action) -> {
+            action.setAnswer("");
+        });
         Collections.shuffle(list);
         return ResponseEntity.ok(list);
-
-
     }
+
     @GetMapping("/quiz/all/{quizId}")
     public ResponseEntity<?> getQuestionsOfQuizAdmin(@PathVariable("quizId") Long quizId) {
        Quiz quiz = new Quiz();
@@ -97,18 +80,22 @@ public class QuestionController {
         double marksGot = 0;
         int correctAnswers = 0;
         int attempted = 0;
+        int wrongAnswers = 0;
 
         for (Question q : questions) {
                 Question question = this.questionService.getQuestionAnswer(q.getQuestionId());
                 if (question.getAnswer().equals(q.getGivenAnswer())) {
                     correctAnswers++;
+                    attempted++;
                     double marksSingle = Double.parseDouble(questions.get(0).getQuiz().getMaxMarks())/questions.size();
                     marksGot += marksSingle;
                 } if (q.getGivenAnswer() != null) {
                     attempted++;
+                } if (q.getGivenAnswer() != q.getAnswer()) {
+                    wrongAnswers++;
                 }
             }
-            Map<Object, Object> map = Map.of("marksGot", marksGot, "correctAnswers", correctAnswers, "attempted", attempted);
+            Map<Object, Object> map = Map.of("marksGot", marksGot, "correctAnswers", correctAnswers, "attempted", attempted, "wrongAnswers", wrongAnswers);
         return ResponseEntity.ok(map);
     }
 }
