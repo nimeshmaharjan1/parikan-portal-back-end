@@ -62,4 +62,8 @@ public class UserController {
         return ResponseEntity.ok(ex.getMessage());
     }
 
+    @PutMapping("/")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        return ResponseEntity.ok(this.userService.updateUser(user));
+    }
 }
