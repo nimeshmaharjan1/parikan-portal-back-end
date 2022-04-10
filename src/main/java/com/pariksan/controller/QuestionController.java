@@ -1,18 +1,17 @@
 package com.pariksan.controller;
 
+import com.pariksan.helper.ExcelHelper;
 import com.pariksan.model.exam.Question;
 import com.pariksan.model.exam.Quiz;
 import com.pariksan.service.QuestionService;
 import com.pariksan.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("/question")
@@ -88,11 +87,24 @@ public class QuestionController {
                     marksGot += marksSingle;
                 } if (q.getGivenAnswer() != null) {
                     attempted++;
-                } if (q.getGivenAnswer() != q.getAnswer()) {
+                } if (!Objects.equals(q.getGivenAnswer(), q.getAnswer())) {
                     wrongAnswers++;
                 }
             }
             Map<Object, Object> map = Map.of("marksGot", marksGot, "correctAnswers", correctAnswers, "attempted", attempted, "wrongAnswers", wrongAnswers);
         return ResponseEntity.ok(map);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> upload(@RequestParam("file")MultipartFile file) {
+        if(ExcelHelper.checkExcelFormat(file)) {
+            this.questionService.save(file);
+            return ResponseEntity.ok(Map.of("message", "File is uploaded and file is saved in the database"));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please upload an excel file.");
+    }
+    @GetMapping("/questions")
+    public List<Question> getAllQuestions() {
+        return this.questionService.getAllQuestions();
     }
 }

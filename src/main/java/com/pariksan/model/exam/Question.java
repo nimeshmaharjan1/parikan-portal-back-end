@@ -24,7 +24,7 @@ public class Question {
     private String answer;
     @Transient
     private String givenAnswer;
-    private String difficultyLevel;
+    private int difficultyLevel;
 
     public Question() {
     }
@@ -48,11 +48,11 @@ public class Question {
         this.content = content;
     }
 
-    public String getdifficultyLevel() {
+    public int getDifficultyLevel() {
         return difficultyLevel;
     }
 
-    public void setdifficultyLevel(String difficultyLevel) {
+    public void setDifficultyLevel(int difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
     }
 

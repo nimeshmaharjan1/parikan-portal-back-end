@@ -1,13 +1,17 @@
 package com.pariksan.service.impl;
 
+import com.pariksan.helper.ExcelHelper;
 import com.pariksan.model.exam.Question;
 import com.pariksan.model.exam.Quiz;
 import com.pariksan.repo.QuestionRepository;
 import com.pariksan.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -51,5 +55,20 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question getQuestionAnswer(Long questionId) {
         return this.questionRepository.getById(questionId);
+    }
+
+    @Override
+    public void save(MultipartFile file) {
+        try {
+            List<Question> questions = ExcelHelper.convertExcelToListOfQuestions(file.getInputStream());
+            this.questionRepository.saveAll(questions);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Question> getAllQuestions() {
+        return this.questionRepository.findAll();
     }
 }
