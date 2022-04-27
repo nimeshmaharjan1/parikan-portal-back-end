@@ -22,7 +22,6 @@ public class Question {
     private String option4;
     @Column(length = 5000)
     private String answer;
-    @Transient
     private String givenAnswer;
     private int difficultyLevel;
 

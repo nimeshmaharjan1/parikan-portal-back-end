@@ -32,15 +32,15 @@ public class PariksanportalApplication implements CommandLineRunner {
 		System.out.println("The application is running...");
 		try{
 		User user = new User();
-		user.setFirstName("Nimesh");
-		user.setLastName("Maharjan");
-		user.setUsername("nimeshmaharjan1");
-		user.setPassword(this.bCryptPasswordEncoder.encode("123456"));
-		user.setEmail("nimesh@gmail.com");
+		user.setFirstName("Tutor");
+		user.setLastName("Test");
+		user.setUsername("TestTutor");
+		user.setPassword(this.bCryptPasswordEncoder.encode("test"));
+		user.setEmail("test@gmail.com");
 		user.setProfile("default.png");
 		user.setPhone("9843323200");
 		user.setIsStudent(true);
-		user.setOccupation("Junior Developer");
+		user.setOccupation("Quality Control");
 
 		Role role1 = new Role();
 		role1.setRoleId(44L);
